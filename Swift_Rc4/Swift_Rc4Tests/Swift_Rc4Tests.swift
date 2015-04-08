@@ -38,7 +38,7 @@ class Swift_Rc4Tests: XCTestCase {
   }
   
   func stringFromBytes(bytes: [UInt8]) -> String {
-    return NSString(bytes: bytes, length: bytes.count, encoding: NSASCIIStringEncoding)!
+    return NSString(bytes: bytes, length: bytes.count, encoding: NSASCIIStringEncoding)! as String
   }
 
   func testPerformanceRc4EncryptLarge() {
@@ -74,6 +74,6 @@ class Swift_Rc4Tests: XCTestCase {
       XCTFail("unable to read the contents of the file")
     }
     
-    return dataString!
+    return dataString! as String
   }
 }

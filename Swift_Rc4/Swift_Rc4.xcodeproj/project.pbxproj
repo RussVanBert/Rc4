@@ -29,7 +29,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		7E1C22DA19C1D9C600811A22 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
 		7EB33C411A27347F00FE9B8A /* large.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = large.txt; path = "../../Test Data Files/large.txt"; sourceTree = "<group>"; };
 		7EB33C421A27347F00FE9B8A /* small.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = small.txt; path = "../../Test Data Files/small.txt"; sourceTree = "<group>"; };
 		D49E83361994C81700D65560 /* Swift_Rc4.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Swift_Rc4.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -101,7 +100,6 @@
 		D49E834B1994C81700D65560 /* Swift_Rc4Tests */ = {
 			isa = PBXGroup;
 			children = (
-				7E1C22DA19C1D9C600811A22 /* MyPlayground.playground */,
 				D49E834E1994C81700D65560 /* Swift_Rc4Tests.swift */,
 				D49E834C1994C81700D65560 /* Supporting Files */,
 			);
