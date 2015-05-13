@@ -2,70 +2,60 @@
 
 @implementation Rc4
 
-+ (NSArray *) byteArr:(NSString *)str {
-  NSMutableArray *result = [NSMutableArray arrayWithCapacity:str.length];
-  for (int i = 0; i < str.length; i++) {
-    [result addObject:[NSNumber numberWithChar:[str characterAtIndex:i]]];
++ (void)byteArr:(UInt8 *)array forString:(NSString *)string {
+  for (int p = 0; p < (int)string.length; p++) {
+    array[p] = [string characterAtIndex:p];
   }
-  
-  return result;
 }
 
-// decrypt really just calls encrypt. Amazing right?
-+ (NSArray *) decrypt:(NSArray *)data forKey:(NSArray *)key {
-  return [self encrypt:data forKey:key];
++ (void)decrypt:(UInt8 *)data cipher:(UInt8 *)cipher cipherLength:(int)cipherLength key:(UInt8 *)key keyLength:(int)keyLength {
+  [Rc4 encrypt:data data:cipher dataLength:cipherLength key:key keyLength:keyLength];
 }
 
-+ (NSArray *) encrypt:(NSArray *)data forKey:(NSArray *)key {
-  NSMutableArray *iS = [[NSMutableArray alloc] initWithCapacity:256];
-  NSMutableArray *iK = [[NSMutableArray alloc] initWithCapacity:256];
-  
-  NSUInteger keyLength = key.count;
++ (void)encrypt:(UInt8 *)cipher data:(UInt8 *)data dataLength:(int)dataLength key:(UInt8 *)key keyLength:(int)keyLength {
+  UInt8 iS[256];
+  [Rc4 keyScheduler:iS key:key keyLength:keyLength];
+  [Rc4 createCipher:cipher data:data dataLength:dataLength iS:iS];
+}
+
++ (void)keyScheduler:(UInt8 *)iS key:(UInt8 *)key keyLength:(int)keyLength {
+  UInt8 iK[256];
   int i;
   for (i = 0; i < 256; i++) {
-    [iS addObject:[NSNumber numberWithInt:i]];
-    int chr = [key[i % keyLength] charValue];
-    [iK addObject:[NSNumber numberWithChar:chr]];
+    iS[i] = i;
+    iK[i] = key[i % keyLength];
   }
   
   int j = 0;
   for (i = 0; i < 256; i++) {
-    UniChar is = [iS[i] charValue];
-    UniChar ik = [iK[i] charValue];
+    int is = iS[i];
+    int ik = iK[i];
     j = (j + is + ik) % 256;
-    [self swap:iS forIndex:i andIndex:j];
+    [Rc4 swap:iS forIndex:i andIndex:j];
   }
-  
-  return [self cipherArray:data swapArray:iS];
 }
 
-+ (void) swap:(NSMutableArray *)iS forIndex:(int)firstIndex andIndex:(int)secondIndex {
-  NSNumber *temp = iS[firstIndex];
-  [iS replaceObjectAtIndex:firstIndex withObject:iS[secondIndex]];
-  [iS replaceObjectAtIndex:secondIndex withObject:temp];
++ (void)swap:(UInt8 *)a forIndex:(int)firstIndex andIndex:(int)secondIndex {
+  UInt8 temp = a[firstIndex];
+  a[firstIndex] = a[secondIndex];
+  a[secondIndex] = temp;
 }
 
-+ (NSMutableArray *)cipherArray:(NSArray *)data swapArray:(NSMutableArray *)iS {
++ (void)createCipher:(UInt8 *)cipher data:(UInt8 *)data dataLength:(int)dataLength iS:(UInt8 *)iS {
   int i = 0;
   int j = 0;
-  NSMutableArray *cipher = [NSMutableArray arrayWithArray:data];
-  NSUInteger dataLength = cipher.count;
   for (int x = 0; x < dataLength; x++) {
     i = (i + 1) % 256;
-    int is_i = [iS[i] intValue];
+    int is_i = iS[i];
     
     j = (j + is_i) % 256;
-    int is_j = [iS[j] intValue];
+    int is_j = iS[j];
     
-    int k = [iS[(is_i + is_j) % 256] intValue];
-    
-    int ch = [data[x] charValue];
-    UniChar exclusiveOr = ch ^ k;
-    NSNumber *cipherCharacter = [NSNumber numberWithInt:exclusiveOr];
+    int k = iS[(is_i + is_j) % 256];
+    int cipherCharacter = data[x] ^ k;
     
     cipher[x] = cipherCharacter;
   }
-  return cipher;
 }
 
 @end

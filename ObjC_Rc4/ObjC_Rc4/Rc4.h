@@ -2,9 +2,9 @@
 
 @interface Rc4 : NSObject
 
-+ (NSArray *) byteArr:(NSString *)str;
++ (void)byteArr:(UInt8 *)array forString:(NSString *)string;
 
-+ (NSArray *) decrypt:(NSArray *)data forKey:(NSArray *)key;
-+ (NSArray *) encrypt:(NSArray *)data forKey:(NSArray *)key;
++ (void)decrypt:(UInt8 *)data cipher:(UInt8 *)cipher cipherLength:(int)cipherLength key:(UInt8 *)key keyLength:(int)keyLength;
++ (void)encrypt:(UInt8 *)cipher data:(UInt8 *)data dataLength:(int)dataLength key:(UInt8 *)key keyLength:(int)keyLength;
 
 @end

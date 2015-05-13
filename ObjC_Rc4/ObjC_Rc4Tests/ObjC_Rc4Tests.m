@@ -9,71 +9,81 @@
 @implementation Rc4Tests
 
 - (void)testRc4EncryptsPedia {
-  // arrange
-  NSString *key = @"Wiki";
-  NSString *data = @"pedia";
-  NSArray  *keyHex  = [Rc4 byteArr:key];
-  NSArray  *dataHex = [Rc4 byteArr:data];
-  UniChar  expectedCipher[] = { 0x10, 0x21, 0xbf, 0x04, 0x20 };
+  NSString *keyString = @"Wiki";
+  NSString *dataString = @"pedia";
+  UInt8 expectedCipher[] = { 0x10, 0x21, 0xbf, 0x04, 0x20 };
+
+  int dataLength = (int)dataString.length;
+  int keyLength = (int)keyString.length;
+  UInt8 data[dataLength];
+  UInt8 key[keyLength];
+  UInt8 cipher[dataLength];
+  [Rc4 byteArr:key forString:keyString];
+  [Rc4 byteArr:data forString:dataString];
+
+  [Rc4 encrypt:cipher data:data dataLength:dataLength key:key keyLength:keyLength];
   
-  // act
-  NSArray *resultCipher = [Rc4 encrypt:dataHex forKey:keyHex];
-  
-  // assert
-  NSUInteger len = resultCipher.count;
-  for (int i = 0; i < len; i++) {
-    UniChar expected = expectedCipher[i];
-    UniChar result = [resultCipher[i] integerValue];
-    XCTAssert(result == expected, @"result didn't match expected");
+  for (int i = 0; i < dataLength; i++) {
+    XCTAssert(cipher[i] == expectedCipher[i], "cipher should match");
   }
 }
 
 - (void)testRc4DecryptsPedia {
   // arrange
-  NSString *key = @"Wiki";
-  UniChar  cipher[] = { 0x10, 0x21, 0xbf, 0x04, 0x20 };
-  NSString *data = [NSString stringWithCharacters:cipher length:ARRAY_LENGTH(cipher)];
-  NSArray  *keyHex  = [Rc4 byteArr:key];
-  NSArray  *dataHex = [Rc4 byteArr:data];
+  NSString *keyString = @"Wiki";
+  UInt8  cipher[] = { 0x10, 0x21, 0xbf, 0x04, 0x20 };
   NSString *expectedString = @"pedia";
   
+  int cipherLength = ARRAY_LENGTH(cipher);
+  int keyLength = (int)keyString.length;
+  UInt8 key[keyLength];
+  UInt8 decipher[cipherLength];
+  [Rc4 byteArr:key forString:keyString];
+  
   // act
-  NSArray *resultString = [Rc4 encrypt:dataHex forKey:keyHex];
+  [Rc4 decrypt:decipher cipher:cipher cipherLength:cipherLength key:key keyLength:keyLength];
   
   // assert
-  for (int i = 0; i < resultString.count; i++) {
-    UniChar expected = [expectedString characterAtIndex:i];
-    UniChar result = [resultString[i] charValue];
-    XCTAssert(result == expected, @"result didn't match expected");
-  }
+  NSString *resultString = [NSString stringWithUTF8String:(char *)decipher];
+  XCTAssert([resultString isEqualToString:expectedString], @"result didn't match expected");
 }
 
 - (void)testRc4EncryptPerformance {
   // arrange
-  NSString *key = @"SomeKeyForMyString";
+  NSString *keyString = @"SomeKeyForMyString";
   NSBundle *testBundle = [NSBundle bundleForClass:[self class]];
   BOOL     small_test = NO; // or YES?
   NSString *path = small_test ? @"small.txt" : @"large.txt";
   NSError  *err;
-  NSString *data = [NSString stringWithContentsOfFile:[testBundle pathForResource:path ofType:nil]
+  NSString *dataString = [NSString stringWithContentsOfFile:[testBundle pathForResource:path ofType:nil]
                                              encoding:NSUTF8StringEncoding
                                                 error:&err];
-  NSArray *keyHex  = [Rc4 byteArr:key];
-  NSArray *dataHex = [Rc4 byteArr:data];
-  
   if (err) {
     NSLog(@"err: %@", err);
     XCTFail(@"error reading the file");
   }
   
-  NSLog(@"data length is %lu bytes", (unsigned long)data.length);
+  int dataLength = (int)dataString.length;
+  int keyLength = (int)keyString.length;
+  NSLog(@"data length is %d bytes", dataLength);
   
+  UInt8 data[dataLength];
+  UInt8 key[keyLength];
+  [Rc4 byteArr:key forString:keyString];
+  [Rc4 byteArr:data forString:dataString];
+  
+
   [self measureBlock:^{
     // act
-    NSArray *cipher = [Rc4 encrypt:dataHex forKey:keyHex];
+    UInt8 data[dataLength];
+    UInt8 key[keyLength];
+    UInt8 cipher[dataLength];
+    [Rc4 byteArr:key forString:keyString];
+    [Rc4 byteArr:data forString:dataString];
+    [Rc4 encrypt:cipher data:data dataLength:dataLength key:key keyLength:keyLength];
     
     // assert? not really, but you can see in the console it executes ten times
-    NSLog(@"first byte encrypted to: %@", cipher[0]);
+    NSLog(@"first byte encrypted to: %d", cipher[0]);
   }];
 }
 
