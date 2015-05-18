@@ -62,8 +62,7 @@ class Rc4 {
       let swap = swappedArr[(is_i + is_j) % 256]
       
       let ch = dataArr[cipherPos]
-      let exclusiveOr = ch ^ swap
-      cipher[cipherPos] = exclusiveOr
+      cipher[cipherPos] = ch ^ swap
     }
     
     return cipher

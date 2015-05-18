@@ -52,9 +52,7 @@
     int is_j = iS[j];
     
     int k = iS[(is_i + is_j) % 256];
-    int cipherCharacter = data[x] ^ k;
-    
-    cipher[x] = cipherCharacter;
+    cipher[x] = data[x] ^ k;
   }
 }
 
