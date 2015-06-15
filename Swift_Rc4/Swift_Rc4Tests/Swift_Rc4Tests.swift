@@ -71,7 +71,7 @@ class Swift_Rc4Tests: XCTestCase {
     let dataString: NSString?
     do {
       dataString = try NSString(contentsOfFile: path!, encoding: NSUTF8StringEncoding)
-    } catch var error as NSError {
+    } catch let error as NSError {
       err.memory = error
       dataString = nil
       print("error reading file: \(err.debugDescription)")
