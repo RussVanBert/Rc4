@@ -51,10 +51,9 @@ class Rc4 {
     var iPos = 0
     var jPos = 0
     var cipher = dataArr
-    var cipherPos = 0
     for cipherPos in 0..<dataArr.count {
       iPos = (iPos + 1) % 256
-      var is_i = Int(swappedArr[iPos])
+      let is_i = Int(swappedArr[iPos])
       
       jPos = (jPos + is_i) % 256
       let is_j = Int(swappedArr[jPos])
