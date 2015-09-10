@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		7EB33C3F1A27346500FE9B8A /* large.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7EB33C3D1A27346500FE9B8A /* large.txt */; };
-		7EB33C401A27346500FE9B8A /* small.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7EB33C3E1A27346500FE9B8A /* small.txt */; };
 		D4BF00A71994C5CD00E757DF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D4BF00A61994C5CD00E757DF /* main.m */; };
 		D4BF00AA1994C5CD00E757DF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D4BF00A91994C5CD00E757DF /* AppDelegate.m */; };
 		D4BF00AD1994C5CD00E757DF /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4BF00AC1994C5CD00E757DF /* ViewController.m */; };
@@ -30,7 +29,6 @@
 
 /* Begin PBXFileReference section */
 		7EB33C3D1A27346500FE9B8A /* large.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = large.txt; path = "../../Test Data Files/large.txt"; sourceTree = "<group>"; };
-		7EB33C3E1A27346500FE9B8A /* small.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = small.txt; path = "../../Test Data Files/small.txt"; sourceTree = "<group>"; };
 		D4BF00A11994C5CD00E757DF /* ObjC_Rc4.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ObjC_Rc4.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4BF00A51994C5CD00E757DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D4BF00A61994C5CD00E757DF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -116,7 +114,6 @@
 			isa = PBXGroup;
 			children = (
 				7EB33C3D1A27346500FE9B8A /* large.txt */,
-				7EB33C3E1A27346500FE9B8A /* small.txt */,
 				D4BF00BC1994C5CE00E757DF /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -224,7 +221,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7EB33C401A27346500FE9B8A /* small.txt in Resources */,
 				7EB33C3F1A27346500FE9B8A /* large.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

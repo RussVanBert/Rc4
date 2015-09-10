@@ -44,8 +44,7 @@ class Swift_Rc4Tests: XCTestCase {
   func testPerformanceRc4EncryptLarge() {
     // arrange
     let keyString  = "SomeKeyForMyString"
-    let small_test = false; // or true?
-    let dataString = small_test ? contentsOf("small.txt") : contentsOf("large.txt")
+    let dataString = contentsOf("large.txt")
     print("data length is \(dataString.lengthOfBytesUsingEncoding(NSUTF8StringEncoding)) bytes")
     let rc4 = Rc4()
     let data = rc4.byteArr(dataString)

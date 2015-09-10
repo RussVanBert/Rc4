@@ -57,9 +57,7 @@
 - (void)testRc4EncryptPerformance {
   // arrange
   NSString *keyString = @"SomeKeyForMyString";
-  BOOL     small_test = NO; // or YES?
-  NSString *path = small_test ? @"small.txt" : @"large.txt";
-  NSString *dataString = [self contentsOf:path];
+  NSString *dataString = [self contentsOf:@"large.txt"];
   
   int dataLength = (int)dataString.length;
   int keyLength = (int)keyString.length;

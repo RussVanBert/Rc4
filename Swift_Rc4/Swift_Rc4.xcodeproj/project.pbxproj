@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		7EA19FAE1997A8820051A77E /* Rc4.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49E83591994CDE600D65560 /* Rc4.swift */; };
 		7EB33C431A27347F00FE9B8A /* large.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7EB33C411A27347F00FE9B8A /* large.txt */; };
-		7EB33C441A27347F00FE9B8A /* small.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7EB33C421A27347F00FE9B8A /* small.txt */; };
 		D49E833C1994C81700D65560 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49E833B1994C81700D65560 /* AppDelegate.swift */; };
 		D49E833E1994C81700D65560 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49E833D1994C81700D65560 /* ViewController.swift */; };
 		D49E83411994C81700D65560 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D49E833F1994C81700D65560 /* Main.storyboard */; };
@@ -30,7 +29,6 @@
 
 /* Begin PBXFileReference section */
 		7EB33C411A27347F00FE9B8A /* large.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = large.txt; path = "../../Test Data Files/large.txt"; sourceTree = "<group>"; };
-		7EB33C421A27347F00FE9B8A /* small.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = small.txt; path = "../../Test Data Files/small.txt"; sourceTree = "<group>"; };
 		D49E83361994C81700D65560 /* Swift_Rc4.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Swift_Rc4.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D49E833A1994C81700D65560 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D49E833B1994C81700D65560 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -110,7 +108,6 @@
 			isa = PBXGroup;
 			children = (
 				7EB33C411A27347F00FE9B8A /* large.txt */,
-				7EB33C421A27347F00FE9B8A /* small.txt */,
 				D49E834D1994C81700D65560 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -217,7 +214,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7EB33C441A27347F00FE9B8A /* small.txt in Resources */,
 				7EB33C431A27347F00FE9B8A /* large.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
