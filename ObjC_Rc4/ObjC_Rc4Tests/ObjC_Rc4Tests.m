@@ -26,6 +26,10 @@
   for (int i = 0; i < dataLength; i++) {
     XCTAssert(cipher[i] == expectedCipher[i], "cipher should match");
   }
+    
+  free(data);
+  free(key);
+  free(cipher);
 }
 
 - (void)testRc4DecryptsPedia {
@@ -47,6 +51,7 @@
   decipher[5] = '\0';
   NSString *resultString = [NSString stringWithUTF8String:(char *)decipher ];
   XCTAssert([resultString isEqualToString:expectedString], @"result didn't match expected");
+  free(decipher);
 }
 
 - (void)testRc4EncryptPerformance {
@@ -73,6 +78,10 @@
     // assert? not really, but you can see in the console it executes ten times
     NSLog(@"first byte encrypted to: %d", cipher[0]);
   }];
+
+  free(data);
+  free(key);
+  free(cipher);
 }
 
 - (NSString *)contentsOf:(NSString *)path {
