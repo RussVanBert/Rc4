@@ -89,8 +89,7 @@
                                                    encoding:NSUTF8StringEncoding
                                                       error:&err];
   if (err) {
-    NSLog(@"err: %@", err);
-    XCTFail(@"error reading the file");
+    XCTFail(@"error reading the file: %@", err);
   }
   
   return fileString;

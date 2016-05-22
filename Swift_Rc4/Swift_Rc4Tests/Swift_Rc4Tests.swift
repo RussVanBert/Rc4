@@ -61,22 +61,17 @@ class Swift_Rc4Tests: XCTestCase {
 
   func contentsOf(fileName: String) -> String {
     let testBundle = NSBundle(forClass: self.dynamicType)
-    let path = testBundle.pathForResource(fileName, ofType: nil)
-    if (path == nil) {
-      XCTFail("cannot find the file")
+    if let path = testBundle.pathForResource(fileName, ofType: nil) {
+      do {
+        let dataString = try NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding)
+        return dataString as String
+      } catch let error as NSError {
+        XCTFail("unable to read the contents of the file: \(error.debugDescription)")
+      }
+    } else {
+      XCTFail("cannot find the file: \(fileName)")
     }
     
-    let err = NSErrorPointer()
-    let dataString: NSString?
-    do {
-      dataString = try NSString(contentsOfFile: path!, encoding: NSUTF8StringEncoding)
-    } catch let error as NSError {
-      err.memory = error
-      dataString = nil
-      print("error reading file: \(err.debugDescription)")
-      XCTFail("unable to read the contents of the file")
-    }
-    
-    return dataString! as String
+    return ""
   }
 }
