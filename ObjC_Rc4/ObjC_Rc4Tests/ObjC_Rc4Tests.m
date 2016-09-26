@@ -8,21 +8,6 @@
 
 @implementation Rc4Tests
 
-static int resultA[6] = {1, 1, 2, 6, 20, 120};
-
-- (void)testFactorialSize {
-  NSLog(@"array %d", resultA[5]);
-}
-
-- (void)testIntSize {
-  int result = 1;
-  for (int i = 5; i > 0; i--) {
-    result *= i;
-  }
-  
-  NSLog(@"calculated %d", result);
-}
-
 - (void)testRc4EncryptsPedia {
   NSString *keyString = @"Wiki";
   NSString *dataString = @"pedia";
