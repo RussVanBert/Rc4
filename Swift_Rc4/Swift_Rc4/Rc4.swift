@@ -1,7 +1,7 @@
 import Foundation
 
 class Rc4 {
-  func byteArr(str: String) -> [UInt8] {
+  func byteArr(_ str: String) -> [UInt8] {
     var result = [UInt8]()
     for strByte in str.utf8 {
       result.append(strByte)
@@ -11,16 +11,16 @@ class Rc4 {
   }
   
   // decrypt really just calls encrypt. Amazing right?
-  func decrypt(data: [UInt8], key: [UInt8]) -> [UInt8] {
+  func decrypt(_ data: [UInt8], key: [UInt8]) -> [UInt8] {
     return encrypt(data, key: key)
   }
 
-  func encrypt(data: [UInt8], key: [UInt8]) -> [UInt8] {
+  func encrypt(_ data: [UInt8], key: [UInt8]) -> [UInt8] {
     let swappedArray = keyScheduler(key)
     return cipherArray(data, swappedArr: swappedArray)
   }
   
-  func keyScheduler(key: [UInt8]) -> [UInt8] {
+  func keyScheduler(_ key: [UInt8]) -> [UInt8] {
     let keySwap = initialKeyArrays(key)
     var iS = keySwap.iS
     var iK = keySwap.iK
@@ -35,7 +35,7 @@ class Rc4 {
     return iS
   }
   
-  func initialKeyArrays(keyArr: [UInt8]) -> (iS: [UInt8], iK: [UInt8]) {
+  func initialKeyArrays(_ keyArr: [UInt8]) -> (iS: [UInt8], iK: [UInt8]) {
     var iS = [UInt8]()
     var iK = [UInt8]()
     let keyLength = keyArr.count
@@ -47,7 +47,7 @@ class Rc4 {
     return (iS, iK)
   }
   
-  func cipherArray(dataArr: [UInt8], swappedArr: [UInt8]) -> [UInt8] {
+  func cipherArray(_ dataArr: [UInt8], swappedArr: [UInt8]) -> [UInt8] {
     var iPos = 0
     var jPos = 0
     var cipher = dataArr

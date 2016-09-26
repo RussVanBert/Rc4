@@ -37,20 +37,20 @@ class Swift_Rc4Tests: XCTestCase {
     XCTAssert(resultString == expectedString, "result didn't match expected")
   }
 
-  func stringFromBytes(bytes: [UInt8]) -> String {
-    return NSString(bytes: bytes, length: bytes.count, encoding: NSASCIIStringEncoding)! as String
+  func stringFromBytes(_ bytes: [UInt8]) -> String {
+    return NSString(bytes: bytes, length: bytes.count, encoding: String.Encoding.ascii.rawValue)! as String
   }
 
   func testPerformanceRc4EncryptLarge() {
     // arrange
     let keyString  = "SomeKeyForMyString"
     let dataString = contentsOf("large.txt")
-    print("data length is \(dataString.lengthOfBytesUsingEncoding(NSUTF8StringEncoding)) bytes")
+    print("data length is \(dataString.lengthOfBytes(using: String.Encoding.utf8)) bytes")
     let rc4 = Rc4()
     let data = rc4.byteArr(dataString)
     let key  = rc4.byteArr(keyString)
 
-    self.measureBlock() {
+    self.measure() {
       // act
       let result = rc4.encrypt(data, key: key)
 
@@ -59,11 +59,11 @@ class Swift_Rc4Tests: XCTestCase {
     }
   }
 
-  func contentsOf(fileName: String) -> String {
-    let testBundle = NSBundle(forClass: self.dynamicType)
-    if let path = testBundle.pathForResource(fileName, ofType: nil) {
+  func contentsOf(_ fileName: String) -> String {
+    let testBundle = Bundle(for: type(of: self))
+    if let path = testBundle.path(forResource: fileName, ofType: nil) {
       do {
-        let dataString = try NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding)
+        let dataString = try NSString(contentsOfFile: path, encoding: String.Encoding.utf8.rawValue)
         return dataString as String
       } catch let error as NSError {
         XCTFail("unable to read the contents of the file: \(error.debugDescription)")
