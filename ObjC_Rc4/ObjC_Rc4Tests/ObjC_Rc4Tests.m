@@ -49,7 +49,7 @@
   
   // assert
   decipher[5] = '\0';
-  NSString *resultString = [NSString stringWithUTF8String:(char *)decipher ];
+  NSString *resultString = @((char *)decipher);
   XCTAssert([resultString isEqualToString:expectedString], @"result didn't match expected");
   free(decipher);
 }
