@@ -23,7 +23,7 @@ class Rc4 {
   func keyScheduler(_ key: [UInt8]) -> [UInt8] {
     let keySwap = initialKeyArrays(key)
     var iS = keySwap.iS
-    var iK = keySwap.iK
+    let iK = keySwap.iK
     var j = 0
     for i in 0..<256 {
       let swapValue: UInt8 = iS[i]
