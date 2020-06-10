@@ -55,7 +55,7 @@ class Swift_Rc4Tests: XCTestCase {
       let result = rc4.encrypt(data, key: key)
 
       // assert? not really, but you can see in the console it executes ten times
-      print("first byte encrypted to: \(result.first)")
+        print("first byte encrypted to: \(String(describing: result.first))")
     }
   }
 
