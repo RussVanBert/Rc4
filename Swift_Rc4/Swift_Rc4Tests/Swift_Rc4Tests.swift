@@ -6,8 +6,10 @@ class Swift_Rc4Tests: XCTestCase {
   func testRc4EncryptsPedia() {
     // arrange
     let keyString  = "Wiki"
-    let dataString = "pedia"
-    let expected: [UInt8] = [0x10, 0x21, 0xbf, 0x04, 0x20]
+    let dataString = "pediapediapedia"
+    let expected: [UInt8] = [0x10, 0x21, 0xbf, 0x04, 0x20,
+                             0xc7, 0x8d, 0x83, 0xcd, 0xb7,
+                             0x89, 0x9e, 0xb0, 0x2b, 0xe2]
     let rc4 = Rc4()
     let data = rc4.byteArr(dataString)
     let key  = rc4.byteArr(keyString)
@@ -24,8 +26,10 @@ class Swift_Rc4Tests: XCTestCase {
   func testRc4DecryptsPedia() {
     // arrange
     let keyString  = "Wiki"
-    let data: [UInt8] = [0x10, 0x21, 0xbf, 0x04, 0x20]
-    let expectedString = "pedia"
+    let data: [UInt8] = [0x10, 0x21, 0xbf, 0x04, 0x20,
+                         0xc7, 0x8d, 0x83, 0xcd, 0xb7,
+                         0x89, 0x9e, 0xb0, 0x2b, 0xe2]
+    let expectedString = "pediapediapedia"
     let rc4 = Rc4()
     let key = rc4.byteArr(keyString)
     
