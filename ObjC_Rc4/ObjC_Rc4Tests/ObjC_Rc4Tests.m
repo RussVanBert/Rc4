@@ -10,8 +10,10 @@
 
 - (void)testRc4EncryptsPedia {
   NSString *keyString = @"Wiki";
-  NSString *dataString = @"pedia";
-  UInt8 expectedCipher[] = { 0x10, 0x21, 0xbf, 0x04, 0x20 };
+  NSString *dataString = @"pediapediapedia";
+  UInt8 expectedCipher[] = { 0x10, 0x21, 0xbf, 0x04, 0x20,
+      0xc7, 0x8d, 0x83, 0xcd, 0xb7,
+      0x89, 0x9e, 0xb0, 0x2b, 0xe2};
 
   int dataLength = (int)dataString.length;
   int keyLength = (int)keyString.length;
@@ -35,8 +37,11 @@
 - (void)testRc4DecryptsPedia {
   // arrange
   NSString *keyString = @"Wiki";
-  UInt8  cipher[] = { 0x10, 0x21, 0xbf, 0x04, 0x20 };
-  NSString *expectedString = @"pedia";
+  UInt8  cipher[] = { 0x10, 0x21, 0xbf, 0x04, 0x20,
+      0xc7, 0x8d, 0x83, 0xcd, 0xb7,
+      0x89, 0x9e, 0xb0, 0x2b, 0xe2};
+
+  NSString *expectedString = @"pediapediapedia";
   
   int cipherLength = ARRAY_LENGTH(cipher);
   int keyLength = (int)keyString.length;
@@ -48,7 +53,7 @@
   [Rc4 decrypt:decipher cipher:cipher cipherLength:cipherLength key:key keyLength:keyLength];
   
   // assert
-  decipher[5] = '\0';
+  decipher[15] = '\0';
   NSString *resultString = @((char *)decipher);
   XCTAssert([resultString isEqualToString:expectedString], @"result didn't match expected");
   free(decipher);

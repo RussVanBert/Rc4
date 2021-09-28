@@ -50,7 +50,9 @@
     
     j = (j + is_i) % 256;
     int is_j = iS[j];
-    
+
+    [Rc4 swap:iS forIndex:i andIndex:j];
+
     int k = iS[(is_i + is_j) % 256];
     cipher[x] = data[x] ^ k;
   }
