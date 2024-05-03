@@ -3,7 +3,7 @@
 //  ObjC_Rc4
 //
 //  Created by Russell Van Bert on 8/08/2014.
-//  Copyright (c) 2014 MYOB. All rights reserved.
+//  Copyright (c) 2024 BlueYarra. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
