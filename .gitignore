@@ -16,4 +16,5 @@ DerivedData
 *.hmap
 *.ipa
 *.xcuserstate
-
+.DS_Store
+*/xcshareddata/WorkspaceSettings.xcsettings
